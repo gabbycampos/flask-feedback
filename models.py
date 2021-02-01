@@ -39,6 +39,8 @@ class User(db.Model):
 
         u = User.query.filter_by(username=username).first()
 
+        # result = bcrypt.check_password_hash(u.password, pwd) #if something is wrong w/ password hashing
+        # print(result)
         if u and bcrypt.check_password_hash(u.password, pwd):
             # return user instance
             return u
@@ -49,3 +51,17 @@ class User(db.Model):
         """ Representation of our User obj """
         return f"User: '{self.username}', '{self.email}', '{self.first_name}', '{self.last_name}'"
 
+
+    # id - a unique primary key that is an auto incrementing integer
+    # title - a not-nullable column that is at most 100 characters
+    # content - a not-nullable column that is text
+    # username - a foreign key that references the username column in the users table
+class Feedback(db.Model):
+    __tablename__ = 'feedback'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    title = db.Column(db.String(100), nullable = False)
+    content = db.Column(db.Text, nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    users = db.relationship("User", backref=db.backref("feedback", cascade="all, delete"))
