@@ -9,7 +9,7 @@
 - WTForms
 - PostgresSQL
 
-![alt text](static/images/add-feedback.png)
-![alt text](static/images/login.png)
 ![alt text](static/images/signup.png)
+![alt text](static/images/login.png)
+![alt text](static/images/add-feedback.png)
 ![alt text](static/images/user-info.png)
